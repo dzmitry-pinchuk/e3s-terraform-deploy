@@ -32,7 +32,7 @@
             "Resource": "*",
             "Condition": {
                 "StringLike": {
-                    "ec2:Region": "{region}"
+                    "ec2:Region": "us-east-2"
                 }
             }
         },
@@ -43,23 +43,23 @@
                 "ec2:CreateTags"
             ],
             "Resource": [
-                "arn:aws:ec2:{region}:{account}:vpc/*",
-                "arn:aws:ec2:{region}:{account}:security-group/*",
-                "arn:aws:ec2:{region}:{account}:subnet/*",
-                "arn:aws:ec2:{region}:{account}:key-pair/e3s-{env}-agent",
-                "arn:aws:ec2:{region}:{account}:elastic-ip/*",
-                "arn:aws:ec2:{region}:{account}:internet-gateway/*",
-                "arn:aws:ec2:{region}:{account}:route-table/*",
-                "arn:aws:ec2:{region}:{account}:vpc-endpoint/*",
-                "arn:aws:ec2:{region}:{account}:natgateway/*",
-                "arn:aws:ec2:{region}:{account}:launch-template/*",
-                "arn:aws:ec2:{region}:{account}:security-group-rule/*",
-                "arn:aws:ec2:{region}:{account}:volume/*"
+                "arn:aws:ec2:us-east-2:791498994738:vpc/*",
+                "arn:aws:ec2:us-east-2:791498994738:security-group/*",
+                "arn:aws:ec2:us-east-2:791498994738:subnet/*",
+                "arn:aws:ec2:us-east-2:791498994738:key-pair/e3s-prod-2025-02-agent",
+                "arn:aws:ec2:us-east-2:791498994738:elastic-ip/*",
+                "arn:aws:ec2:us-east-2:791498994738:internet-gateway/*",
+                "arn:aws:ec2:us-east-2:791498994738:route-table/*",
+                "arn:aws:ec2:us-east-2:791498994738:vpc-endpoint/*",
+                "arn:aws:ec2:us-east-2:791498994738:natgateway/*",
+                "arn:aws:ec2:us-east-2:791498994738:launch-template/*",
+                "arn:aws:ec2:us-east-2:791498994738:security-group-rule/*",
+                "arn:aws:ec2:us-east-2:791498994738:volume/*"
             ],
             "Condition": {
                 "StringEquals": {
                     "aws:RequestTag/Name": "e3s",
-                    "aws:RequestTag/Environment": "{env}"
+                    "aws:RequestTag/Environment": "prod-2025-02"
                 }
             }
         },
@@ -70,12 +70,12 @@
                 "ec2:CreateTags"
             ],
             "Resource": [
-                "arn:aws:ec2:{region}:{account}:instance/*"
+                "arn:aws:ec2:us-east-2:791498994738:instance/*"
             ],
             "Condition": {
                 "StringEquals": {
-                    "aws:RequestTag/Name": "e3s-{env}",
-                    "aws:RequestTag/Environment": "{env}"
+                    "aws:RequestTag/Name": "e3s-prod-2025-02",
+                    "aws:RequestTag/Environment": "prod-2025-02"
                 }
             }
         }

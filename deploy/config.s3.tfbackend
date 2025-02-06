@@ -1,5 +1,5 @@
 bucket         = "e3s-terraform-state"
 key            = "e3s.state"
-region         = "us-east-1"
-dynamodb_table = "e3s-terraform-lock"
+region         = "us-east-2"
+dynamodb_table = "esg-terraform-lock"
 encrypt        = true

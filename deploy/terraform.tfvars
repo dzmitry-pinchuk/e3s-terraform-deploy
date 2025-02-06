@@ -1,23 +1,23 @@
-profile = "terraform"
+profile = "default"
 
-environment = "prod"
-region = "us-east-1"
+environment = "prod-2025-02"
+region = "us-east-2"
 
-e3s_server_instance_type = "m5n.large"
-e3s_key_pair_name = "e3s-prod-key-pair"
+e3s_server_instance_type = "m5n.xlarge"
+e3s_key_pair_name = "e3s-prod-2025-02"
 
-# agent_key_pair = {
-#     generate = true
-#     save_private_key_in_file = true
-#     save_public_key_in_file = false
-#     private_key_file_path = ""
-#     public_key_file_path = ""
-# }
+agent_key_pair = {
+    generate = true
+    save_private_key_in_file = false
+    save_public_key_in_file = false
+    private_key_file_path = ""
+    public_key_file_path = ""
+}
 
 bucket = {
-    exists = false
-    name = "e3s-prod-assets"
-    region = "us-east-1"
+    exists = true
+    name = "esg-engine"
+    region = "us-east-2"
 }
 
 enable_cloudwatch = false
@@ -27,27 +27,22 @@ max_az_number = 3
 data_layer_remote = true
 remote_db = {
     username = "postgres"
-    pass = "uI6LPNC54K3LnP4E7y4u9ihi"
+    pass = "Q8SzXCKbSCFx219iluIqmeuo"
 }
 
 instance_types = [
     {
         weight = 1
-        instance_type = "c5a.4xlarge"
+        instance_type = "c5a.2xlarge"
     },
     {
         weight = 2
-        instance_type = "c5a.8xlarge"
+        instance_type = "c5a.4xlarge"
     }
 ]
 
-spot_price = {
-    linux   = "1"
-    windows = "1"
-}
-
 zebrunner = {
     host = "https://zebruner.com"
-    user = "user"
-    pass = "pass"
+    user = "engine"
+    pass = "L2LJ4ugHtfeXPQmuKN3cgFWg7r3PXEr2"
 }

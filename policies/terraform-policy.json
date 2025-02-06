@@ -35,9 +35,9 @@
                 "ecs:DeleteCapacityProvider"
             ],
             "Resource": [
-                "arn:aws:ecs:{region}:{account}:cluster/e3s-{env}",
-                "arn:aws:ecs:{region}:{account}:capacity-provider/e3s-{env}-linux-capacityprovider",
-                "arn:aws:ecs:{region}:{account}:capacity-provider/e3s-{env}-windows-capacityprovider"
+                "arn:aws:ecs:us-east-2:791498994738:cluster/e3s-prod-2025-02",
+                "arn:aws:ecs:us-east-2:791498994738:capacity-provider/e3s-prod-2025-02-linux-capacityprovider",
+                "arn:aws:ecs:us-east-2:791498994738:capacity-provider/e3s-prod-2025-02-windows-capacityprovider"
             ]
         },
         {
@@ -52,8 +52,8 @@
                 "autoscaling:UpdateAutoScalingGroup"
             ],
             "Resource": [
-                "arn:aws:autoscaling:{region}:{account}:autoScalingGroup:*:autoScalingGroupName/e3s-{env}-linux-asg",
-                "arn:aws:autoscaling:{region}:{account}:autoScalingGroup:*:autoScalingGroupName/e3s-{env}-windows-asg"
+                "arn:aws:autoscaling:us-east-2:791498994738:autoScalingGroup:*:autoScalingGroupName/e3s-prod-2025-02-linux-asg",
+                "arn:aws:autoscaling:us-east-2:791498994738:autoScalingGroup:*:autoScalingGroupName/e3s-prod-2025-02-windows-asg"
             ]
         },
         {
@@ -83,15 +83,15 @@
                 "iam:RemoveRoleFromInstanceProfile"
             ],
             "Resource": [
-                "arn:aws:iam::{account}:policy/e3s-{env}-policy",
-                "arn:aws:iam::{account}:policy/e3s-{env}-agent-policy",
-                "arn:aws:iam::{account}:policy/e3s-{env}-task-policy",
-                "arn:aws:iam::{account}:policy/{bucket_name}-policy",
-                "arn:aws:iam::{account}:role/e3s-{env}-role",
-                "arn:aws:iam::{account}:role/e3s-{env}-agent-role",
-                "arn:aws:iam::{account}:role/e3s-{env}-task-role",
-                "arn:aws:iam::{account}:instance-profile/e3s-{env}-role",
-                "arn:aws:iam::{account}:instance-profile/e3s-{env}-agent-role"
+                "arn:aws:iam::791498994738:policy/e3s-prod-2025-02-policy",
+                "arn:aws:iam::791498994738:policy/e3s-prod-2025-02-agent-policy",
+                "arn:aws:iam::791498994738:policy/e3s-prod-2025-02-task-policy",
+                "arn:aws:iam::791498994738:policy/esg-engine-policy",
+                "arn:aws:iam::791498994738:role/e3s-prod-2025-02-role",
+                "arn:aws:iam::791498994738:role/e3s-prod-2025-02-agent-role",
+                "arn:aws:iam::791498994738:role/e3s-prod-2025-02-task-role",
+                "arn:aws:iam::791498994738:instance-profile/e3s-prod-2025-02-role",
+                "arn:aws:iam::791498994738:instance-profile/e3s-prod-2025-02-agent-role"
             ]
         },
         {
@@ -101,9 +101,9 @@
                 "iam:PassRole"
             ],
             "Resource": [
-                "arn:aws:iam::{account}:role/e3s-{env}-role",
-                "arn:aws:iam::{account}:role/e3s-{env}-agent-role",
-                "arn:aws:iam::{account}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+                "arn:aws:iam::791498994738:role/e3s-prod-2025-02-role",
+                "arn:aws:iam::791498994738:role/e3s-prod-2025-02-agent-role",
+                "arn:aws:iam::791498994738:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
             ]
         },
         {
@@ -118,7 +118,7 @@
                 "logs:DeleteLogGroup"
             ],
             "Resource": [
-                "arn:aws:logs:{region}:{account}:log-group:e3s-{env}-log-group*"
+                "arn:aws:logs:us-east-2:791498994738:log-group:e3s-prod-2025-02-log-group*"
             ]
         },
         {
@@ -149,15 +149,15 @@
                 "s3:DeleteObjectVersion"
             ],
             "Resource": [
-                "arn:aws:s3:::{bucket_name}",
-                "arn:aws:s3:::{bucket_name}/*"
+                "arn:aws:s3:::esg-engine",
+                "arn:aws:s3:::esg-engine/*"
             ]
         },
         {
             "Sid": "RemoteStateBucketCheck",
             "Effect": "Allow",
             "Action": "s3:ListBucket",
-            "Resource": "arn:aws:s3:::{state_bucket_name}"
+            "Resource": "arn:aws:s3:::e3s-terraform-state"
         },
         {
             "Effect": "Allow",
@@ -165,7 +165,7 @@
                 "s3:GetObject",
                 "s3:PutObject"
             ],
-            "Resource": "arn:aws:s3:::{state_bucket_name}/{state_bucket_key}"
+            "Resource": "arn:aws:s3:::e3s-terraform-state/e3s.state"
         },
         {
             "Sid": "RemoteStateLock",
@@ -175,7 +175,7 @@
                 "dynamodb:GetItem",
                 "dynamodb:DeleteItem"
             ],
-            "Resource": "arn:aws:dynamodb:{dynamodb_region}:{account}:table/{dynamodb_table}"
+            "Resource": "arn:aws:dynamodb:us-east-2:791498994738:table/esg-terraform-lock"
         },
         {
             "Sid": "ELBV2",
@@ -192,9 +192,9 @@
                 "elasticloadbalancing:DeleteListener"
             ],
             "Resource": [
-                "arn:aws:elasticloadbalancing:{region}:{account}:targetgroup/e3s-{env}-tg/*",
-                "arn:aws:elasticloadbalancing:{region}:{account}:loadbalancer/app/e3s-{env}-alb/*",
-                "arn:aws:elasticloadbalancing:{region}:{account}:listener/app/e3s-{env}-alb/*"
+                "arn:aws:elasticloadbalancing:us-east-2:791498994738:targetgroup/e3s-prod-2025-02-tg/*",
+                "arn:aws:elasticloadbalancing:us-east-2:791498994738:loadbalancer/app/e3s-prod-2025-02-alb/*",
+                "arn:aws:elasticloadbalancing:us-east-2:791498994738:listener/app/e3s-prod-2025-02-alb/*"
             ]
         },
         {
@@ -210,8 +210,8 @@
                 "rds:DeleteDBInstance"
             ],
             "Resource": [
-                "arn:aws:rds:{region}:{account}:subgrp:e3s-{env}-rds-subnet",
-                "arn:aws:rds:{region}:{account}:db:e3s-{env}-postgres*"
+                "arn:aws:rds:us-east-2:791498994738:subgrp:e3s-prod-2025-02-rds-subnet",
+                "arn:aws:rds:us-east-2:791498994738:db:e3s-prod-2025-02-postgres*"
             ]
         },
         {
@@ -225,7 +225,7 @@
                 "elasticache:DeleteServerlessCache"
             ],
             "Resource": [
-                "arn:aws:elasticache:{region}:{account}:serverlesscache:e3s-{env}-redis"
+                "arn:aws:elasticache:us-east-2:791498994738:serverlesscache:e3s-prod-2025-02-redis"
             ]
         },
         {
@@ -236,7 +236,7 @@
                 "ec2:CreateTags"
             ],
             "Resource": [
-                "arn:aws:ec2:{region}:{account}:vpc-endpoint/*"
+                "arn:aws:ec2:us-east-2:791498994738:vpc-endpoint/*"
             ],
             "Condition": {
                 "StringEquals": {
@@ -251,7 +251,7 @@
                 "ec2:DeleteVpcEndpoints"
             ],
             "Resource": [
-                "arn:aws:ec2:{region}:{account}:vpc-endpoint/*"
+                "arn:aws:ec2:us-east-2:791498994738:vpc-endpoint/*"
             ],
             "Condition": {
                 "StringEquals": {
