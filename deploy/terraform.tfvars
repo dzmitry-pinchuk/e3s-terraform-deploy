@@ -22,12 +22,12 @@ bucket = {
 
 enable_cloudwatch = false
 nat = true
-max_az_number = 3
+max_az_number = 2
 
 data_layer_remote = true
 remote_db = {
     username = "postgres"
-    pass = "Q8SzXCKbSCFx219iluIqmeuo"
+    pass = "{stored aws secret manager}"
 }
 
 instance_types = [
@@ -44,5 +44,5 @@ instance_types = [
 zebrunner = {
     host = "https://zebruner.com"
     user = "engine"
-    pass = "L2LJ4ugHtfeXPQmuKN3cgFWg7r3PXEr2"
+    pass = "{stored aws secret manager}"
 }
